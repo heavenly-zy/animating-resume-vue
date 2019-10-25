@@ -1,28 +1,41 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <pre>{{code}}</pre>
+    <div v-html='styleCode'></div>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
 
-export default {
-  name: 'app',
-  components: {
-    HelloWorld
-  }
-}
+  export default {
+    name: 'app',
+    components: {
+
+    },
+    data(){
+      return{
+        code:``,
+        finallyCode:`
+html{
+   background:red;
+}`
+      }
+    },
+    created(){
+      var n = 0
+      setInterval(()=>{
+        this.code = this.finallyCode.slice(0,n)
+        n += 1
+      },100)
+    },
+    computed:{
+      styleCode(){
+        return '<style>' + this.code + '</style>'
+        }
+        }
+        }
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+
 </style>
